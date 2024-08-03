@@ -54,3 +54,20 @@ Source: https://github.com/dcpedit/vial-qmk-dev/tree/vial/keyboards/dcpedit/kint
 Source: https://github.com/dcpedit/zmk/tree/kinesispb/app/boards/shields/kinesispb
 * `/firmware/zmk_default.uf2` - Default keymap (stock Kinesis)
 * `/firmware/zmk_reset.uf2` - Resets PillBug board for BT connectivity issue on MacOS
+
+### Flashing firmware under Linux
+The file firmware/dcpedit_kint_bp_vial.bin (or other) can simply be flashed to the Blackpill using the dfu-util. The dfu-util tool requires root privileges if settings are not accessible by the user.
+
+Connect Blackpill to your Linux PC via USB C cable and start unit in DFU mode by holding bootp button and pressing reset button. Wait a second and release the bootp button.
+
+Check the DFU devices by running
+```
+dfu-util -l
+```
+The Blackpill device should be visible.
+
+Write the firmware to the device with
+```
+dfu-util -d 0483:df11 -a 0 -s 0x08000000 -D [PATH TO kint]/firmware/dcpedit_kint_bp_vial.bin
+```
+
